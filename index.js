@@ -15,7 +15,7 @@ var
 
 if (command && !_.include(commands, command)) {
   console.log(('Valid commands include: ' + commands.sort().join(', ')).red);
-  console.log(('Valid -options include: -exclude=directory,dir2  | -with_images | -show_skips' ).blue);
+  console.log(('Valid -options include: --exclude=directory,dir2  | --with_images | --show_skips | --exclude_extensions=html,coffee ( defaults to image types, use -with_images to include [ not exclude ] these )' ).blue);
   process.exit(1)
 }
 
