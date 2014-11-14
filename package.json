@@ -1,0 +1,22 @@
+{
+  "name": "gimme-lines",
+  "description": "Get line numbers for a directory",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "bin": "index.js",
+  "repository": "https://github.com/danschumann/gimme-lines/",
+  "author": {
+    "name": "Daniel Schumann",
+    "email": "dan.schumann@gmail.com"
+  },
+  "LICENSE": "MIT",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "debug": "^2.1.0",
+    "loaddir": "^2.1.2",
+    "optimist": "^0.6.1",
+    "underscore": "^1.7.0"
+  }
+}
