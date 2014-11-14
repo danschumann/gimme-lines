@@ -27,3 +27,7 @@ Get line numbers for files in a directory
 
 ![Alt text](https://raw.githubusercontent.com/danschumann/gimme-lines/master/example.png "Optional Title")
 ######_The `Total Lines` is wrong in this image because I edited this image in `mspaint`_
+
+
+#### NOTE: Skipping Files
+don't include the extension.  this is currently a limitation with the `black_list` functionality in `loaddir`.
