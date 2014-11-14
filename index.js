@@ -8,10 +8,13 @@ require('colors');
 var
   commands = ['verbose', 'filenames', 'paths', 'version', 'v'],
   fixArgs = require('./lib/fix_args'),
-  argv = fixArgs(require('optimist').argv),
-  command = argv._[0],
+  argv = require('optimist').argv,
+  command,
   _excludeExtensions = (argv.exclude_extensions || '').split(','),
   excludeExtensions = (argv.with_images ? [] : ['jpg', 'png', 'gif', 'bmp']).concat(_excludeExtensions);
+
+argv = fixArgs(argv, __dirname, __filename);
+command = argv._[0];
 
 if (command && !_.include(commands, command)) {
   console.log(('Valid commands include: ' + commands.sort().join(', ')).red);

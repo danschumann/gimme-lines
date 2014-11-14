@@ -1,7 +1,7 @@
 {
   "name": "gimme-lines",
   "description": "Get line numbers for a directory",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "scripts": {
     "start": "node index.js"
   },
