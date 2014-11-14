@@ -9,17 +9,22 @@ var
   commands = ['verbose', 'filenames', 'paths', 'version', 'v'],
   fixArgs = require('./lib/fix_args'),
   argv = fixArgs(require('optimist').argv),
-  command = argv._[0];
+  command = argv._[0],
+  _excludeExtensions = (argv.exclude_extensions || '').split(','),
+  excludeExtensions = (argv.with_images ? [] : ['jpg', 'png', 'gif', 'bmp']).concat(_excludeExtensions);
 
 if (command && !_.include(commands, command)) {
   console.log(('Valid commands include: ' + commands.sort().join(', ')).red);
+  console.log(('Valid -options include: -exclude=directory,dir2  | -with_images | -show_skips' ).blue);
   process.exit(1)
 }
 
 if (argv.v || command == 'version' || command == 'v') {
   console.log('Gimme-lines version '.blue, require('./package.json').version);
 
-} else if ( command == 'filenames' ) {
+} else {
+  console.log('Gimme-lines Running... '.blue, command || '');
+
 
 }
 
@@ -30,24 +35,52 @@ loaddir({
   black_list: argv.exclude ? argv.exclude.split(',') : undefined,
   callback: function(){
 
+    //console.log(this._ext);
+    if ( _.include(excludeExtensions, (this._ext || '').substring(1).toLowerCase())) {
+     
+      if ( argv.show_skips ) console.log('Skipping'.red, this.path);
+      return this.fileContents = null;
+    }
+
     var len = this.fileContents.split('\n').length - 1;
     total += len;
     lenStr = (this.fileContents.split('\n').length + '').blue
 
-    switch (command) {
-      case 'verbose':
-        console.log(lenStr, this.fileName.green, this.path.gray);
-        break;
-      case 'filenames':
-        console.log(lenStr, this.fileName);
-        break;
-      case 'paths':
-        console.log(lenStr, this.path);
-        break;
+    this.fileContents = {
+      len: len,
+      lenStr: lenStr,
+      path: this.path,
+      fileName: this.fileName,
     };
+
 
   },
 }).then(function(output){
+
+  _.each(output, function(f) {
+
+    if (!f) return;
+
+    switch (command) {
+
+      case 'verbose':
+
+        console.log(f.lenStr, f.fileName.green, f.path.gray);
+        break;
+
+      case 'filenames':
+
+        console.log(f.lenStr, f.fileName);
+        break;
+
+      case 'paths':
+
+        console.log(f.lenStr, f.path);
+        break;
+    };
+
+  });
+
   console.log('\nTotal lines...\n', total, '\n');
   process.exit(0);
 });
