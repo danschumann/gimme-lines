@@ -25,9 +25,6 @@ Get line numbers for files in a directory
 * `gimme-lines --show_skips` shows files that were skipped due to extension
 * `gimme-lines --exclude_extensions=html,coffee` skips these extensions
 
-![Alt text](https://raw.githubusercontent.com/danschumann/gimme-lines/master/example.png "Optional Title")
-######_The `Total Lines` is wrong in this image because I edited this image in `mspaint`_
-
 
 #### NOTE: Skipping Files
 don't include the extension.  this is currently a limitation with the `black_list` functionality in `loaddir`.
