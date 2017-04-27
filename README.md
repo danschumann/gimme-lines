@@ -11,6 +11,11 @@ Get line numbers for files in a directory
 
 ### Usage
 
+```
+  cd /home/me/myproject
+  gimme-lines
+```
+
 #### Commands
 
 * `gimme-lines`
